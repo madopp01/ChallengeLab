@@ -1,0 +1,30 @@
+---
+- name: gather info
+  hosts: CSR1kv
+  gather_facts: False
+  connection: local
+ 
+  tasks:
+   - name: show_version
+     ios_command:
+       commands:
+         - show version | include Version | include IOS
+           
+     register: Version
+   - name: Show interfaces
+     ios_command:
+       commands:
+         - show ip interface brief 
+         
+          
+     register: Interfaces
+ 
+   - name: save version interfaceversion
+     copy:
+       content: "{{ Version.stdout[0] }}"
+       dest: "info/Version_on_{{ inventory_hostname }}.txt"
+
+   - name: GEM INTERFACES OUTPUT I "INTERFACEVERSION"
+     copy:
+       content: "{{ Interfaces.stdout[0] }}"
+       dest: "info/Interfaces_On_{{ inventory_hostname }}.txt"

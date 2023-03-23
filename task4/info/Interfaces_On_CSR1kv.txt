@@ -1,0 +1,4 @@
+Interface              IP-Address      OK? Method Status                Protocol
+GigabitEthernet1       172.20.100.79   YES DHCP   up                    up      
+Loopback1              10.1.1.1        YES other  up                    up      
+Loopback5              10.1.2.3        YES other  up                    up
